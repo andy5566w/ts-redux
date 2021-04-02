@@ -8,7 +8,6 @@ const RepositoriesList: React.FC = () => {
   const { data, error, loading } = useTypedSelector(
     (state) => state.repositories
   )
-  console.table({ data, error, loading })
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -25,6 +24,15 @@ const RepositoriesList: React.FC = () => {
           onChange={(e) => setTerm(e.target.value)}
         />
         <button>search</button>
+        {error && <h3>{error}</h3>}
+        {loading && 'Loading'}
+        {data.length > 0 && (
+          <ul>
+            {data.map((string) => (
+              <li key={string}>{string}</li>
+            ))}
+          </ul>
+        )}
       </form>
     </div>
   )
